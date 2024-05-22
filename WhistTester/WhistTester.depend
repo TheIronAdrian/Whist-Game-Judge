@@ -12,3 +12,16 @@
 	<assert.h>
 	<string>
 
+1716409179 source:c:\users\mihai\mihai-cod\concurscatalinfrancu2024\whist-game-judge\whisttester\main.cpp
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<iostream>
+	<algorithm>
+	<vector>
+	<time.h>
+	<random>
+	<chrono>
+	<assert.h>
+	<string>
+

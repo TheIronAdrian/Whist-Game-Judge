@@ -13,6 +13,10 @@
 #define MAXT 8
 #define PACHET 52
 #define MAXNNAME 20
+#define MAXCULORI 4
+#define MAXTIPURICARTI 13
+#define CONSTWINSTREAK 5
+#define WINSTREAKPOINTS 10
 
 using namespace std;
 
@@ -51,6 +55,7 @@ struct PLAYER{
   CARTE carti[MAXT];
   char name[MAXNNAME];
   int puncte;
+  int contorStreak;
   int valGhicita;
   int nrCastiguri;
 };
@@ -59,8 +64,8 @@ FILE *fout;
 PLAYER date[MAXN];
 CARTE cartiOrd[PACHET];
 CARTE cartiUtil[PACHET];
-char culoriPosibile[4]={'I','C','P','T'}; ///Putem sa le schimbam
-char jqka[4]={'J','Q','K','A'};
+char culoriPosibile[MAXCULORI]={'I','C','P','T'}; ///Putem sa le schimbam
+char tipuriCarti[MAXTIPURICARTI]={'1','2','3','4','5','6','7','8','9','J','Q','K','A'}; ///Putem sa le schimbam
 int nrCartiPachet;
 int nrMeci;
 int n;
@@ -130,17 +135,14 @@ int TTCOGiveCarte(int joc,int nrPuncteRamas,CARTE PrimaCarte,CARTE Atu,CARTE val
 int CalculPutereCarte(char a){
   int z,aux;
 
-  if(a>='1' && a<='9'){
-    return a-'0';
-  }
-  aux=10;
+  aux=0;
   z=0;
-  while(jqka[z]!=a && z<4){
+  while(tipuriCarti[z]!=a && z<MAXTIPURICARTI){
     z++;
     aux++;
   }
 
-  if(z<4){
+  if(z<MAXTIPURICARTI){
     return aux;
   }
 
@@ -151,9 +153,8 @@ bool CarteMaiMare(char a,char b){
   return CalculPutereCarte(a)>CalculPutereCarte(b);
 }
 
-int Joc(int nrCarti,int firstPlayer){
-  int i,j,c,s,poz,x,aux,z;
-  CARTE Atu,ma,carteJucator,primaCarte;
+CARTE InitMana(int nrCarti,int firstPlayer){
+  int i,j,c,poz;
 
   unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
   fprintf(fout,"RANDOM SHUFFLE SEED : %d\n",seed);
@@ -162,9 +163,10 @@ int Joc(int nrCarti,int firstPlayer){
   shuffle(cartiOrd,cartiOrd+nrCartiPachet,rng);
 
   /*
-  cartiOrd[0]={'A','I',0};
-  cartiOrd[1]={'K','I',0};
-  cartiOrd[2]={'J','P',0};
+  cartiOrd[0]={'A','C',0};
+  cartiOrd[1]={'9','T',0};
+  cartiOrd[2]={'A','I',0};
+  cartiOrd[3]={'9','P',0};
   //*/
 
   poz=0;
@@ -183,25 +185,58 @@ int Joc(int nrCarti,int firstPlayer){
   }
 
   if(nrCarti==8){
-    Atu={-1,-1,-1};
-  }else{
-    Atu=cartiOrd[poz];
+    return {-1,-1,-1};
   }
+  return cartiOrd[poz];
+}
+
+bool CheckValitateCarte(int carteaData,int jucator,int nrCarti,CARTE Atu,CARTE PrimaPusa){
+  int i;
+  CARTE aux;
+
+  if(PrimaPusa.culoare==-1){
+    return 1;
+  }
+
+  aux=date[jucator].carti[carteaData];
+
+  assert(!(carteaData<0 || carteaData>nrCarti) && "Cartea Data Out Of Bounds");
+
+  assert(aux.used==0 && "Cartea Data A Fost Folosita Deja");
+
+  if(aux.culoare==PrimaPusa.culoare){
+    return 1;
+  }
+
+  i=0;
+  while(i<nrCarti && !(date[jucator].carti[i].culoare==PrimaPusa.culoare && date[jucator].carti[i].culoare==0)){
+    i++;
+  }
+
+  assert(i>=nrCarti && "Cartea Data Nu Respecta Culoarea");
+
+  if(Atu.culoare==-1 || date[jucator].carti[carteaData].culoare==Atu.culoare){
+    return 1;
+  }
+
+  i=0;
+  while(i<nrCarti && !(date[jucator].carti[i].culoare==Atu.culoare && date[jucator].carti[i].culoare==0)){
+    i++;
+  }
+
+  assert(i>=nrCarti && "Cartea Data Nu Este Atu");
+
+  return 1;
+}
+
+void AfisJocStart(CARTE Atu,int nrCarti){
+  int i,j;
 
   fprintf(fout,"\n------MECI %2d------\n\n",nrMeci);
 
   if(nrCarti!=8){
     fprintf(fout,"Atu -- %c %c --\n",Atu.val,Atu.culoare);
   }
-
-  s=0;
-  i=firstPlayer;
-  for(c=1;c<n;c++){
-    date[i].valGhicita=date[i].SetGhicit(nrCarti,-1,s,date[i].carti);
-    s+=date[i].valGhicita;
-    i=(i+1)%n;
-  }
-  date[i].valGhicita=date[i].SetGhicit(nrCarti,nrCarti-s,s,date[i].carti);
 
   for(i=0;i<n;i++){
     fprintf(fout,"\n%s - Nr Alese - %2d\n",date[i].name,date[i].valGhicita);
@@ -210,6 +245,48 @@ int Joc(int nrCarti,int firstPlayer){
     }
   }
   fprintf(fout,"\n");
+}
+
+bool Maxim(CARTE a,CARTE b,CARTE Atu){
+  int valA,valB;
+
+  valA=CalculPutereCarte(a.val);
+  valB=CalculPutereCarte(b.val);
+
+  if(a.culoare==Atu.culoare){
+    valA+=MAXTIPURICARTI+1;
+  }
+  if(b.culoare==Atu.culoare){
+    valB+=MAXTIPURICARTI+1;
+  }
+
+  return valA<valB;
+}
+
+int Joc(int nrCarti,int firstPlayer){
+  int i,j,c,s,poz,x,aux,z;
+  CARTE Atu,ma,carteJucator,primaCarte;
+
+
+  Atu=InitMana(nrCarti,firstPlayer);///Initializare
+
+  ///-----------------Start Zona Ghicit------------------------
+  s=0;
+  i=firstPlayer;
+  for(c=1;c<n;c++){
+    date[i].valGhicita=date[i].SetGhicit(nrCarti,-1,s,date[i].carti);
+    assert(date[i].valGhicita<=nrCarti && date[i].valGhicita>=0 && "Ai ghicit un numar de carti imposibil");
+    s+=date[i].valGhicita;
+    i=(i+1)%n;
+  }
+  date[i].valGhicita=date[i].SetGhicit(nrCarti,nrCarti-s,s,date[i].carti);
+
+  assert(date[i].valGhicita<=nrCarti && date[i].valGhicita>=0 && "Ai ghicit un numar de carti imposibil");
+  assert(date[i].valGhicita!=nrCarti-s && "Ultima persoana a spus fix numarul carti pe care nu are voie");
+
+  ///-----------------Final Zona Ghicit------------------------
+
+  AfisJocStart(Atu,nrCarti);
 
   cartiUtil[0]=Atu;
   poz=1;
@@ -219,44 +296,30 @@ int Joc(int nrCarti,int firstPlayer){
     x=firstPlayer;
 
     aux=date[x].GiveCarte(nrCarti,date[x].valGhicita-date[x].nrCastiguri,{-1,-1,-1},Atu,date[x].carti);
-    if(date[x].carti[aux].used==0 && aux<=nrCarti){
-      date[x].carti[aux].used=1;
-      carteJucator=date[x].carti[aux];
-      primaCarte=carteJucator;
-      ma=carteJucator;
-    }else{
-      assert(0 && "L de tip carte gresita data");
-    }
+
+    CheckValitateCarte(aux,i,nrCarti,Atu,{-1,-1,-1});
+
+    date[x].carti[aux].used=1;
+    carteJucator=date[x].carti[aux];
+
+    primaCarte=carteJucator;
+    ma=carteJucator;
+
     fprintf(fout,"%s : %c %c\n",date[i].name,carteJucator.val,carteJucator.culoare);
+
     for(c=1;c<n;c++){
       i=(i+1)%n;
       aux=date[i].GiveCarte(nrCarti,date[i].valGhicita-date[i].nrCastiguri,primaCarte,Atu,date[i].carti);
-      if(date[i].carti[aux].used==0 && aux<=nrCarti){
-        date[i].carti[aux].used=1;
-        carteJucator=date[i].carti[aux];
-        if(ma.culoare==Atu.culoare){
-          if(ma.culoare==carteJucator.culoare){
-            if(CarteMaiMare(carteJucator.val,ma.val)){
-              ma=carteJucator;
-              x=i;
-            }
-          }
-        }else{
-          if(ma.culoare==carteJucator.culoare){
-            if(CarteMaiMare(carteJucator.val,ma.val)){
-              ma=carteJucator;
-              x=i;
-            }
-          }else{
-            if(carteJucator.culoare==Atu.culoare){
-              ma=carteJucator;
-              x=i;
-            }
-          }
-        }
-      }else{
-        assert(0 && "L de tip carte gresita data");
+      CheckValitateCarte(aux,i,nrCarti,Atu,primaCarte);
+
+      date[i].carti[aux].used=1;
+      carteJucator=date[i].carti[aux];
+
+      if(Maxim(ma,carteJucator,Atu)){
+        ma=carteJucator;
+        x=i;
       }
+
       fprintf(fout,"%s : %c %c\n",date[i].name,carteJucator.val,carteJucator.culoare);
     }
 
@@ -270,10 +333,27 @@ int Joc(int nrCarti,int firstPlayer){
   for(i=0;i<n;i++){
     if(date[i].nrCastiguri==date[i].valGhicita){
       date[i].puncte+=5+date[i].nrCastiguri;
+      if(date[i].contorStreak>=0){
+        date[i].contorStreak++;
+      }else{
+        date[i].contorStreak=-1;
+      }
     }else{
       date[i].puncte-=abs(date[i].nrCastiguri-date[i].valGhicita);
+      if(date[i].contorStreak<=0){
+        date[i].contorStreak--;
+      }else{
+        date[i].contorStreak=1;
+      }
     }
-    fprintf(fout,"%3d ",date[i].puncte);
+    if(abs(date[i].contorStreak)==CONSTWINSTREAK){
+      date[i].puncte+=WINSTREAKPOINTS*(date[i].contorStreak/CONSTWINSTREAK);
+      date[i].contorStreak=0;
+      fprintf(fout,"#");
+    }
+    fprintf(fout,"%s : %3d ",date[i].name,date[i].puncte);
+    fprintf(fout,"\n");
+
   }
   fprintf(fout,"\n");
 
@@ -300,18 +380,14 @@ void Init(){
   strcpy(date[1].name,  "Test1");
   strcpy(date[2].name,  "Test2");
   n=3;
+
+
   nrMeci=0;
 
   j=0;
-  for(i=10-(n-2)*2+1;i<=10;i++){
+  for(i=MAXTIPURICARTI-n*2;i<MAXTIPURICARTI;i++){
     for(z=0;z<4;z++){
-      cartiOrd[j*4+z]={'0'+i-1,culoriPosibile[z],0};
-    }
-    j++;
-  }
-  for(i=0;i<4;i++){
-    for(z=0;z<4;z++){
-      cartiOrd[j*4+z]={jqka[i],culoriPosibile[z],0};
+      cartiOrd[j*4+z]={tipuriCarti[i],culoriPosibile[z],0};
     }
     j++;
   }
