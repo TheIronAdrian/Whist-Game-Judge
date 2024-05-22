@@ -1,0 +1,14 @@
+# depslib dependency file v1.0
+1716318722 source:c:\users\mihai\mihai-cod\concurscatalinfrancu2024\whisttester\main.cpp
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<iostream>
+	<algorithm>
+	<vector>
+	<time.h>
+	<random>
+	<chrono>
+	<assert.h>
+	<string>
+
