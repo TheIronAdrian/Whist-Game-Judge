@@ -46,10 +46,12 @@ struct CARTE{
   char val,culoare,used;
 };
 
-typedef int (*AGhici)(int a,int b,int c,CARTE val[MAXT]);
-typedef int (*ADaCarte)(int joc,int nrPuncteRamas,CARTE PrimaCarte,CARTE Atu,CARTE val[MAXT]);
+struct PUBLICPLAYER;
 
-struct PLAYER{
+typedef int (*AGhici)(int joc,CARTE cartiPers[MAXT],PUBLICPLAYER datePublice[MAXN],CARTE Atu);
+typedef int (*ADaCarte)(int joc,CARTE cartiPers[MAXT],PUBLICPLAYER datePublice[MAXN],CARTE Atu,CARTE PrimaCarte);
+
+struct PRIVATEPLAYER{
   AGhici SetGhicit;
   ADaCarte GiveCarte;
   CARTE carti[MAXT];
@@ -60,10 +62,17 @@ struct PLAYER{
   int nrCastiguri;
 };
 
+struct PUBLICPLAYER{
+  CARTE cartiFolosite[MAXT];
+  int puncte;
+  int contorStreak;
+  int valGhicita;
+  int nrCastiguri;
+};
+
 FILE *fout;
-PLAYER date[MAXN];
+PRIVATEPLAYER date[MAXN];
 CARTE cartiOrd[PACHET];
-CARTE cartiUtil[PACHET];
 char culoriPosibile[MAXCULORI]={'I','C','P','T'}; ///Putem sa le schimbam
 char tipuriCarti[MAXTIPURICARTI]={'1','2','3','4','5','6','7','8','9','J','Q','K','A'}; ///Putem sa le schimbam
 int nrCartiPachet;
@@ -72,8 +81,24 @@ int n;
 
 ///----------------FunctiiJucatori----------
 
-int TTCOSetGhicit(int joc,int catNuAiVoie,int catSaGhicit,CARTE val[MAXT]){
-  int aux;
+
+
+///----------------FunctiiJucatori----------
+
+
+///----------------FunctiiExemple----------
+
+int TestSetGhicit(int joc,CARTE cartiPers[MAXT],PUBLICPLAYER datePublice[MAXN],CARTE Atu){
+  int i,aux,catNuAiVoie;
+
+  aux=0;
+  for(i=0;i<n;i++){
+    if(datePublice[i].valGhicita!=-1){
+      aux+=datePublice[i].valGhicita;
+    }
+  }
+
+  catNuAiVoie=joc-aux;
 
   do{
     aux=rand()%(joc+1);
@@ -82,29 +107,19 @@ int TTCOSetGhicit(int joc,int catNuAiVoie,int catSaGhicit,CARTE val[MAXT]){
   return aux;
 }
 
-int TestSetGhicit(int joc,int catNuAiVoie,int catSaGhicit,CARTE val[MAXT]){
-  int aux;
-
-  do{
-    aux=rand()%(joc+1);
-  }while(aux==catNuAiVoie);
-
-  return aux;
-}
-
-int TTCOGiveCarte(int joc,int nrPuncteRamas,CARTE PrimaCarte,CARTE Atu,CARTE val[MAXT]){
+int TestGiveCarte(int joc,CARTE cartiPers[MAXT],PUBLICPLAYER datePublice[MAXN],CARTE Atu,CARTE PrimaCarte){
   int x;
 
   x=0;
   if(PrimaCarte.culoare==-1){
-    while(val[x].used==1){
+    while(cartiPers[x].used==1){
       x++;
     }
     return x;
   }
 
   x=0;
-  while(x<joc && (val[x].used!=0 || val[x].culoare==PrimaCarte.culoare)){
+  while(x<joc && (cartiPers[x].used!=0 || cartiPers[x].culoare==PrimaCarte.culoare)){
     x++;
   }
   if(x<joc){
@@ -112,7 +127,7 @@ int TTCOGiveCarte(int joc,int nrPuncteRamas,CARTE PrimaCarte,CARTE Atu,CARTE val
   }
 
   x=0;
-  while(x<joc && (val[x].used!=0 || val[x].culoare==Atu.culoare)){
+  while(x<joc && (cartiPers[x].used!=0 || cartiPers[x].culoare==Atu.culoare)){
     x++;
   }
   if(x<joc){
@@ -120,17 +135,14 @@ int TTCOGiveCarte(int joc,int nrPuncteRamas,CARTE PrimaCarte,CARTE Atu,CARTE val
   }
 
   x=0;
-  while(val[x].used==1){
+  while(cartiPers[x].used==1){
     x++;
   }
 
-  /*if(x>2){
-    exit(x);
-  }*/
   return x;
 }
 
-///----------------FunctiiJucatori----------
+///----------------FunctiiExemple----------
 
 int CalculPutereCarte(char a){
   int z,aux;
@@ -190,7 +202,7 @@ CARTE InitMana(int nrCarti,int firstPlayer){
   return cartiOrd[poz];
 }
 
-bool CheckValitateCarte(int carteaData,int jucator,int nrCarti,CARTE Atu,CARTE PrimaPusa){
+bool CheckValiditateCarte(int carteaData,int jucator,int nrCarti,CARTE Atu,CARTE PrimaPusa){
   int i;
   CARTE aux;
 
@@ -266,20 +278,34 @@ bool Maxim(CARTE a,CARTE b,CARTE Atu){
 int Joc(int nrCarti,int firstPlayer){
   int i,j,c,s,poz,x,aux,z;
   CARTE Atu,ma,carteJucator,primaCarte;
+  PUBLICPLAYER datePublice[MAXN];
 
 
   Atu=InitMana(nrCarti,firstPlayer);///Initializare
+
+  for(i=0;i<n;i++){
+    datePublice[i].contorStreak=date[i].contorStreak;
+    datePublice[i].nrCastiguri=0;
+    datePublice[i].puncte=date[i].puncte;
+    datePublice[i].valGhicita=-1;
+    for(j=0;j<MAXT;j++){
+      datePublice[i].cartiFolosite[j]={-1,-1,-1};
+    }
+  }
+
 
   ///-----------------Start Zona Ghicit------------------------
   s=0;
   i=firstPlayer;
   for(c=1;c<n;c++){
-    date[i].valGhicita=date[i].SetGhicit(nrCarti,-1,s,date[i].carti);
+    date[i].valGhicita=date[i].SetGhicit(nrCarti,date[i].carti,datePublice,Atu);
+    datePublice[i].valGhicita=date[i].valGhicita;
     assert(date[i].valGhicita<=nrCarti && date[i].valGhicita>=0 && "Ai ghicit un numar de carti imposibil");
     s+=date[i].valGhicita;
     i=(i+1)%n;
   }
-  date[i].valGhicita=date[i].SetGhicit(nrCarti,nrCarti-s,s,date[i].carti);
+  date[i].valGhicita=date[i].SetGhicit(nrCarti,date[i].carti,datePublice,Atu);
+  datePublice[i].valGhicita=date[i].valGhicita;
 
   assert(date[i].valGhicita<=nrCarti && date[i].valGhicita>=0 && "Ai ghicit un numar de carti imposibil");
   assert(date[i].valGhicita!=nrCarti-s && "Ultima persoana a spus fix numarul carti pe care nu are voie");
@@ -288,19 +314,19 @@ int Joc(int nrCarti,int firstPlayer){
 
   AfisJocStart(Atu,nrCarti);
 
-  cartiUtil[0]=Atu;
   poz=1;
 
   for(z=0;z<nrCarti;z++){
     i=firstPlayer;
     x=firstPlayer;
 
-    aux=date[x].GiveCarte(nrCarti,date[x].valGhicita-date[x].nrCastiguri,{-1,-1,-1},Atu,date[x].carti);
+    aux=date[x].GiveCarte(nrCarti,date[i].carti,datePublice,Atu,{-1,-1,-1});
 
-    CheckValitateCarte(aux,i,nrCarti,Atu,{-1,-1,-1});
+    CheckValiditateCarte(aux,i,nrCarti,Atu,{-1,-1,-1});
 
-    date[x].carti[aux].used=1;
-    carteJucator=date[x].carti[aux];
+    date[i].carti[aux].used=1;
+    carteJucator=date[i].carti[aux];
+    datePublice[i].cartiFolosite[z]=date[i].carti[aux];
 
     primaCarte=carteJucator;
     ma=carteJucator;
@@ -309,11 +335,12 @@ int Joc(int nrCarti,int firstPlayer){
 
     for(c=1;c<n;c++){
       i=(i+1)%n;
-      aux=date[i].GiveCarte(nrCarti,date[i].valGhicita-date[i].nrCastiguri,primaCarte,Atu,date[i].carti);
-      CheckValitateCarte(aux,i,nrCarti,Atu,primaCarte);
+      aux=date[i].GiveCarte(nrCarti,date[i].carti,datePublice,Atu,primaCarte);
+      CheckValiditateCarte(aux,i,nrCarti,Atu,primaCarte);
 
       date[i].carti[aux].used=1;
       carteJucator=date[i].carti[aux];
+      datePublice[i].cartiFolosite[z]=date[i].carti[aux];
 
       if(Maxim(ma,carteJucator,Atu)){
         ma=carteJucator;
@@ -368,13 +395,13 @@ void Init(){
 
   fout=fopen("final.out","w");
   fprintf(fout,"RANDOM SEED : %d\n",aux);
-  date[0].SetGhicit=TTCOSetGhicit;
+  date[0].SetGhicit=TestSetGhicit;
   date[1].SetGhicit=TestSetGhicit;
   date[2].SetGhicit=TestSetGhicit;
 
-  date[0].GiveCarte=TTCOGiveCarte;
-  date[1].GiveCarte=TTCOGiveCarte;
-  date[2].GiveCarte=TTCOGiveCarte;
+  date[0].GiveCarte=TestGiveCarte;
+  date[1].GiveCarte=TestGiveCarte;
+  date[2].GiveCarte=TestGiveCarte;
 
   strcpy(date[0].name,  "TTCO ");
   strcpy(date[1].name,  "Test1");
