@@ -9,6 +9,9 @@
 #include <chrono>
 #include <assert.h>
 #include <string>
+#include <conio.h>
+#include <string>
+#include <unistd.h>
 #define MAXN 7
 #define MAXT 8
 #define PACHET 52
@@ -52,8 +55,10 @@ typedef int (*AGhici)(int joc,CARTE cartiPers[MAXT],PUBLICPLAYER datePublice[MAX
 typedef int (*ADaCarte)(int joc,CARTE cartiPers[MAXT],PUBLICPLAYER datePublice[MAXN],CARTE Atu,CARTE PrimaCarte);
 
 struct PRIVATEPLAYER{
-  AGhici SetGhicit;
-  ADaCarte GiveCarte;
+  //AGhici SetGhicit;
+  //ADaCarte GiveCarte;
+  string SetGhicit;
+  string GiveCarte;
   CARTE carti[MAXT];
   char name[MAXNNAME];
   int puncte;
@@ -81,7 +86,103 @@ int n;
 
 ///----------------FunctiiJucatori----------
 
+string NumberToString(int nr){
+  int put;
+  char aux;
+  string ans=" ";
 
+  if(nr<0){
+    ans=ans+"-";
+    nr=-nr;
+  }
+
+  if(nr==0){
+    return " 0";
+  }
+
+  put=1;
+  while(put<=nr){
+    put*=10;
+  }
+  put/=10;
+
+  while(put>0){
+    aux=(nr/put)%10+'0';
+    ans=ans+aux;
+    put/=10;
+  }
+
+  ans=ans+" ";
+
+  return ans;
+}
+
+string CharToString(char nr){
+
+  if(nr<0){
+    return " -1";
+  }
+
+  return " "+nr;
+}
+
+int PlayerGhicit(int player,int joc,CARTE cartiPers[MAXT],PUBLICPLAYER datePublice[MAXN],CARTE Atu){
+  int i,j,val;
+  string strcommand;
+
+  strcommand=date[player].SetGhicit;
+
+  strcommand=strcommand+NumberToString(joc);
+  strcommand=strcommand+NumberToString(n);
+  strcommand=strcommand+NumberToString(player);
+
+  for(i=0;i<joc;i++){
+    strcommand=strcommand+" ";
+    strcommand=strcommand+cartiPers[i].val;
+    strcommand=strcommand+cartiPers[i].culoare;
+    //cout << strcommand;
+  }
+
+  for(i=0;i<n;i++){
+    strcommand=strcommand+NumberToString(datePublice[i].puncte);
+    strcommand=strcommand+NumberToString(datePublice[i].contorStreak);
+    strcommand=strcommand+NumberToString(datePublice[i].valGhicita);
+    strcommand=strcommand+NumberToString(datePublice[i].nrCastiguri);
+
+    for(j=0;j<joc;j++){
+      strcommand=strcommand+" ";
+      if(datePublice[i].cartiFolosite[j].val!=-1){
+        strcommand=strcommand+datePublice[i].cartiFolosite[j].val;
+        strcommand=strcommand+datePublice[i].cartiFolosite[j].culoare;
+      }else{
+        strcommand=strcommand+"++";
+      }
+    }
+  }
+
+  strcommand=strcommand+" ";
+  strcommand=strcommand+Atu.val;
+  strcommand=strcommand+Atu.culoare;
+
+  val=system((strcommand).c_str());
+
+  if()
+
+  return val;
+}
+
+int PlayerCarte(int player,int joc,CARTE cartiPers[MAXT],PUBLICPLAYER datePublice[MAXN],CARTE Atu,CARTE PrimaCarte){
+  int i,val;
+  string strcommand;
+
+  strcommand=date[player].GiveCarte;
+
+
+
+  val=system((strcommand).c_str());
+
+  return val;
+}
 
 ///----------------FunctiiJucatori----------
 
@@ -180,6 +281,12 @@ CARTE InitMana(int nrCarti,int firstPlayer){
   cartiOrd[2]={'A','I',0};
   cartiOrd[3]={'9','P',0};
   //*/
+
+  for(i=0;i<n;i++){
+    for(j=0;j<MAXT;j++){
+      date[i].carti[j]={-1,-1,-1};
+    }
+  }
 
   poz=0;
   for(j=0;j<nrCarti;j++){
@@ -298,13 +405,13 @@ int Joc(int nrCarti,int firstPlayer){
   s=0;
   i=firstPlayer;
   for(c=1;c<n;c++){
-    date[i].valGhicita=date[i].SetGhicit(nrCarti,date[i].carti,datePublice,Atu);
+    date[i].valGhicita=PlayerGhicit(i,nrCarti,date[i].carti,datePublice,Atu);
     datePublice[i].valGhicita=date[i].valGhicita;
     assert(date[i].valGhicita<=nrCarti && date[i].valGhicita>=0 && "Ai ghicit un numar de carti imposibil");
     s+=date[i].valGhicita;
     i=(i+1)%n;
   }
-  date[i].valGhicita=date[i].SetGhicit(nrCarti,date[i].carti,datePublice,Atu);
+  date[i].valGhicita=PlayerGhicit(i,nrCarti,date[i].carti,datePublice,Atu);
   datePublice[i].valGhicita=date[i].valGhicita;
 
   assert(date[i].valGhicita<=nrCarti && date[i].valGhicita>=0 && "Ai ghicit un numar de carti imposibil");
@@ -320,7 +427,7 @@ int Joc(int nrCarti,int firstPlayer){
     i=firstPlayer;
     x=firstPlayer;
 
-    aux=date[x].GiveCarte(nrCarti,date[i].carti,datePublice,Atu,{-1,-1,-1});
+    aux=PlayerCarte(x,nrCarti,date[i].carti,datePublice,Atu,{-1,-1,-1});
 
     CheckValiditateCarte(aux,i,nrCarti,Atu,{-1,-1,-1});
 
@@ -335,7 +442,7 @@ int Joc(int nrCarti,int firstPlayer){
 
     for(c=1;c<n;c++){
       i=(i+1)%n;
-      aux=date[i].GiveCarte(nrCarti,date[i].carti,datePublice,Atu,primaCarte);
+      aux=PlayerCarte(i,nrCarti,date[i].carti,datePublice,Atu,primaCarte);
       CheckValiditateCarte(aux,i,nrCarti,Atu,primaCarte);
 
       date[i].carti[aux].used=1;
@@ -395,13 +502,21 @@ void Init(){
 
   fout=fopen("final.out","w");
   fprintf(fout,"RANDOM SEED : %d\n",aux);
-  date[0].SetGhicit=TestSetGhicit;
+  /*date[0].SetGhicit=TestSetGhicit;
   date[1].SetGhicit=TestSetGhicit;
   date[2].SetGhicit=TestSetGhicit;
 
   date[0].GiveCarte=TestGiveCarte;
   date[1].GiveCarte=TestGiveCarte;
-  date[2].GiveCarte=TestGiveCarte;
+  date[2].GiveCarte=TestGiveCarte;*/
+
+  date[0].SetGhicit="bin\\Debug\\set.exe ";
+  date[1].SetGhicit="bin\\Debug\\set.exe ";
+  date[2].SetGhicit="bin\\Debug\\set.exe ";
+
+  date[0].GiveCarte="bin\\Debug\\give.exe ";
+  date[1].GiveCarte="bin\\Debug\\give.exe ";
+  date[2].GiveCarte="bin\\Debug\\give.exe ";
 
   strcpy(date[0].name,  "TTCO ");
   strcpy(date[1].name,  "Test1");
@@ -424,12 +539,6 @@ void Init(){
 
 int main() {
     int i,firstPlayer,winner;
-
-    /*system("cmd.exe");
-    system("bash");
-
-
-    return 0;*/
 
     Init();///Initializeaza Jocul
 
