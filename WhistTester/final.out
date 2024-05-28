@@ -1,949 +1,949 @@
-RANDOM SEED : 1716501372
-RANDOM SHUFFLE SEED : 1908573876
+RANDOM SEED : 1716895119
+RANDOM SHUFFLE SEED : -852429816
 
 ------MECI  0------
 
-Atu -- J T --
+Atu -- T T --
 
 TTCO  - Nr Alese -  0
-9 T
+Q T
 
 Test1 - Nr Alese -  0
 K C
 
 Test2 - Nr Alese -  0
-J I
+A T
 
-TTCO  : 9 T
+TTCO  : Q T
 Test1 : K C
-Test2 : J I
-CASTIGATOR RUNDA 0 TTCO 
+Test2 : A T
+CASTIGATOR RUNDA 0 Test2
 
-TTCO  :  -1 
+TTCO  :   5 
 Test1 :   5 
-Test2 :   5 
+Test2 :  -1 
 
-RANDOM SHUFFLE SEED : 1908573876
+RANDOM SHUFFLE SEED : -852429816
 
 ------MECI  1------
 
-Atu -- A P --
+Atu -- Q I --
 
 TTCO  - Nr Alese -  0
-J C
+K I
 
 Test1 - Nr Alese -  0
-9 P
+K T
 
 Test2 - Nr Alese -  0
-8 T
+J C
 
-Test1 : 9 P
-Test2 : 8 T
-TTCO  : J C
-CASTIGATOR RUNDA 0 Test1
+Test1 : K T
+Test2 : J C
+TTCO  : K I
+CASTIGATOR RUNDA 0 TTCO 
 
 TTCO  :   4 
-Test1 :   4 
-Test2 :  10 
+Test1 :  10 
+Test2 :   4 
 
-RANDOM SHUFFLE SEED : 1908573876
+RANDOM SHUFFLE SEED : -852429816
 
 ------MECI  2------
 
-Atu -- 9 C --
+Atu -- T I --
 
 TTCO  - Nr Alese -  0
 J T
 
 Test1 - Nr Alese -  0
-A T
+A C
 
 Test2 - Nr Alese -  0
-Q I
+9 T
 
-Test2 : Q I
+Test2 : 9 T
 TTCO  : J T
-Test1 : A T
+Test1 : A C
 CASTIGATOR RUNDA 0 Test1
 
 TTCO  :   9 
-Test1 :   3 
-Test2 :  15 
+Test1 :   9 
+Test2 :   9 
 
-RANDOM SHUFFLE SEED : 1908573876
+RANDOM SHUFFLE SEED : -852429816
 
 ------MECI  3------
 
-Atu -- J C --
+Atu -- A C --
 
-TTCO  - Nr Alese -  0
-8 P
-A C
+TTCO  - Nr Alese -  1
+T T
+T C
 
 Test1 - Nr Alese -  0
-A P
-8 C
+9 C
+Q P
 
 Test2 - Nr Alese -  0
 Q C
-9 T
+9 I
 
-TTCO  : 8 P
-Test1 : 8 C
+TTCO  : T T
+Test1 : 9 C
 Test2 : Q C
 CASTIGATOR RUNDA 0 Test2
-Test2 : 9 T
-TTCO  : A C
-Test1 : A P
+Test2 : 9 I
+TTCO  : T C
+Test1 : Q P
 CASTIGATOR RUNDA 1 TTCO 
 
-TTCO  :   8 
-Test1 :   8 
-Test2 :  14 
+TTCO  :  15 
+Test1 :  14 
+Test2 :   8 
 
-RANDOM SHUFFLE SEED : 1908573876
+RANDOM SHUFFLE SEED : -852429816
 
 ------MECI  4------
 
-Atu -- K I --
+Atu -- J T --
 
-TTCO  - Nr Alese -  0
-9 I
-9 P
-K T
+TTCO  - Nr Alese -  3
+A P
+Q T
+A I
 
-Test1 - Nr Alese -  0
-J I
-K P
-A T
+Test1 - Nr Alese -  1
+Q I
+J P
+Q C
 
-Test2 - Nr Alese -  2
-9 C
+Test2 - Nr Alese -  3
 K C
-J C
+9 I
+K P
 
-Test1 : J I
-Test2 : 9 C
-TTCO  : 9 P
-CASTIGATOR RUNDA 0 Test1
-Test1 : K P
+Test1 : Q I
 Test2 : K C
-TTCO  : 9 I
+TTCO  : A P
+CASTIGATOR RUNDA 0 TTCO 
+TTCO  : Q T
+Test1 : J P
+Test2 : 9 I
 CASTIGATOR RUNDA 1 TTCO 
-TTCO  : K T
-Test1 : A T
-Test2 : J C
-CASTIGATOR RUNDA 2 Test1
+TTCO  : A I
+Test1 : Q C
+Test2 : K P
+CASTIGATOR RUNDA 2 TTCO 
 
-TTCO  :   7 
-Test1 :   6 
-Test2 :  12 
+TTCO  :  23 
+Test1 :  13 
+Test2 :   5 
 
-RANDOM SHUFFLE SEED : 1908573876
+RANDOM SHUFFLE SEED : -852429816
 
 ------MECI  5------
 
 Atu -- 9 I --
 
-TTCO  - Nr Alese -  3
-A C
-8 T
-A T
-J P
-
-Test1 - Nr Alese -  3
-K T
-Q I
-K I
+TTCO  - Nr Alese -  4
+J C
+Q T
+Q P
 9 T
 
+Test1 - Nr Alese -  1
+T P
+K T
+J I
+K C
+
 Test2 - Nr Alese -  2
-J C
-8 I
-Q C
-Q T
+T I
+K P
+A P
+9 C
 
-Test2 : J C
-TTCO  : 8 T
+Test2 : T I
+TTCO  : J C
+Test1 : T P
+CASTIGATOR RUNDA 0 Test2
+Test2 : K P
+TTCO  : Q T
 Test1 : K T
-CASTIGATOR RUNDA 0 Test1
-Test1 : Q I
-Test2 : Q C
-TTCO  : A C
-CASTIGATOR RUNDA 1 Test1
-Test1 : K I
-Test2 : Q T
-TTCO  : A T
+CASTIGATOR RUNDA 1 Test2
+Test2 : A P
+TTCO  : 9 T
+Test1 : J I
 CASTIGATOR RUNDA 2 Test1
-Test1 : 9 T
-Test2 : 8 I
-TTCO  : J P
-CASTIGATOR RUNDA 3 Test2
+Test1 : K C
+Test2 : 9 C
+TTCO  : Q P
+CASTIGATOR RUNDA 3 Test1
 
-TTCO  :   4 
-Test1 :  14 
-Test2 :  11 
+TTCO  :  19 
+Test1 :  12 
+Test2 :  12 
 
-RANDOM SHUFFLE SEED : 1908573876
+RANDOM SHUFFLE SEED : -852429816
 
 ------MECI  6------
 
-Atu -- A C --
+Atu -- J P --
 
 TTCO  - Nr Alese -  0
-A T
-9 T
-9 I
-8 C
-K T
+T C
+Q P
+T P
+K C
+Q T
 
-Test1 - Nr Alese -  1
-K P
+Test1 - Nr Alese -  3
 J T
+K T
+9 I
+T T
 Q C
-A I
-8 T
 
 Test2 - Nr Alese -  3
-K I
-8 P
-Q T
 9 P
-Q P
+9 T
+A I
+J C
+T I
 
-TTCO  : A T
-Test1 : K P
-Test2 : K I
-CASTIGATOR RUNDA 0 TTCO 
-TTCO  : 9 T
-Test1 : Q C
-Test2 : 8 P
-CASTIGATOR RUNDA 1 Test1
+TTCO  : T C
 Test1 : J T
 Test2 : 9 P
-TTCO  : 9 I
-CASTIGATOR RUNDA 2 Test1
-Test1 : A I
-Test2 : Q T
-TTCO  : 8 C
+CASTIGATOR RUNDA 0 Test2
+Test2 : 9 T
+TTCO  : Q P
+Test1 : 9 I
+CASTIGATOR RUNDA 1 TTCO 
+TTCO  : T P
+Test1 : K T
+Test2 : A I
+CASTIGATOR RUNDA 2 TTCO 
+TTCO  : K C
+Test1 : T T
+Test2 : T I
 CASTIGATOR RUNDA 3 TTCO 
-TTCO  : K T
-Test1 : 8 T
-Test2 : Q P
+TTCO  : Q T
+Test1 : Q C
+Test2 : J C
 CASTIGATOR RUNDA 4 TTCO 
 
-#TTCO  :  -9 
-Test1 :  13 
-Test2 :   8 
+TTCO  :  15 
+Test1 :   9 
+Test2 :  10 
 
-RANDOM SHUFFLE SEED : 1908573876
+RANDOM SHUFFLE SEED : -852429816
 
 ------MECI  7------
 
-Atu -- A T --
+Atu -- T I --
 
-TTCO  - Nr Alese -  6
-Q T
+TTCO  - Nr Alese -  5
+A T
+T T
 J I
-8 C
-Q I
-Q P
-9 T
-
-Test1 - Nr Alese -  5
-Q C
-9 P
-K T
+J T
+T C
 K C
-K I
+
+Test1 - Nr Alese -  3
+J P
+9 I
+9 P
+J C
+K T
 K P
 
-Test2 - Nr Alese -  0
-8 I
+Test2 - Nr Alese -  2
+9 C
+9 T
+Q T
+Q I
 A P
-9 I
-J P
-J T
 A C
 
-Test1 : Q C
-Test2 : 8 I
-TTCO  : Q T
+Test1 : J P
+Test2 : 9 C
+TTCO  : A T
 CASTIGATOR RUNDA 0 TTCO 
+TTCO  : T T
+Test1 : 9 I
+Test2 : Q I
+CASTIGATOR RUNDA 1 Test2
+Test2 : 9 T
 TTCO  : J I
 Test1 : 9 P
+CASTIGATOR RUNDA 2 TTCO 
+TTCO  : J T
+Test1 : J C
 Test2 : A P
-CASTIGATOR RUNDA 1 Test2
-Test2 : 9 I
-TTCO  : 8 C
-Test1 : K T
-CASTIGATOR RUNDA 2 Test1
-Test1 : K C
-Test2 : J P
-TTCO  : Q I
-CASTIGATOR RUNDA 3 Test1
-Test1 : K I
-Test2 : J T
-TTCO  : Q P
-CASTIGATOR RUNDA 4 Test2
-Test2 : A C
-TTCO  : 9 T
+CASTIGATOR RUNDA 3 Test2
+Test2 : Q T
+TTCO  : T C
 Test1 : K P
-CASTIGATOR RUNDA 5 TTCO 
+CASTIGATOR RUNDA 4 Test1
+Test1 : K T
+Test2 : A C
+TTCO  : K C
+CASTIGATOR RUNDA 5 Test2
 
-TTCO  : -13 
-Test1 :  10 
-Test2 :   6 
+TTCO  :  12 
+Test1 :   7 
+Test2 :   9 
 
-RANDOM SHUFFLE SEED : 1908573876
+RANDOM SHUFFLE SEED : -851428116
 
 ------MECI  8------
 
-Atu -- A T --
+Atu -- T P --
 
-TTCO  - Nr Alese -  6
-9 T
-9 C
+TTCO  - Nr Alese -  7
 K T
-A I
-A P
-K P
-A C
-
-Test1 - Nr Alese -  5
-8 C
-J C
-K C
-8 P
+J T
 Q P
-9 P
-J P
-
-Test2 - Nr Alese -  3
-9 I
 Q I
-K I
-8 T
+K P
+T T
+J I
+
+Test1 - Nr Alese -  6
 Q T
-8 I
+A C
 Q C
+K C
+J C
+A P
+K I
 
-Test2 : 9 I
-TTCO  : 9 T
-Test1 : 8 C
+Test2 - Nr Alese -  2
+A T
+J P
+T C
+A I
+9 P
+9 C
+9 T
+
+Test2 : A T
+TTCO  : Q P
+Test1 : A C
 CASTIGATOR RUNDA 0 TTCO 
-TTCO  : 9 C
-Test1 : 8 P
-Test2 : Q I
-CASTIGATOR RUNDA 1 Test2
-Test2 : K I
 TTCO  : K T
-Test1 : J C
-CASTIGATOR RUNDA 2 TTCO 
-TTCO  : A I
+Test1 : Q C
+Test2 : J P
+CASTIGATOR RUNDA 1 Test2
+Test2 : T C
+TTCO  : J T
+Test1 : Q T
+CASTIGATOR RUNDA 2 Test1
 Test1 : K C
-Test2 : 8 T
+Test2 : A I
+TTCO  : Q I
 CASTIGATOR RUNDA 3 Test2
-Test2 : Q T
-TTCO  : A P
-Test1 : Q P
+Test2 : 9 P
+TTCO  : T T
+Test1 : J C
 CASTIGATOR RUNDA 4 Test2
-Test2 : 8 I
+Test2 : 9 C
 TTCO  : K P
-Test1 : 9 P
-CASTIGATOR RUNDA 5 TTCO 
-TTCO  : A C
-Test1 : J P
-Test2 : Q C
-CASTIGATOR RUNDA 6 TTCO 
+Test1 : A P
+CASTIGATOR RUNDA 5 Test1
+Test1 : K I
+Test2 : 9 T
+TTCO  : J I
+CASTIGATOR RUNDA 6 Test1
 
-TTCO  : -15 
-Test1 :   5 
-Test2 :  14 
+TTCO  :   6 
+Test1 :   4 
+Test2 :   8 
 
-RANDOM SHUFFLE SEED : 1908573876
+RANDOM SHUFFLE SEED : -851428116
 
 ------MECI  9------
 
 
 TTCO  - Nr Alese -  7
-K T
-8 P
 Q T
-J T
-8 C
-9 T
-9 I
-Q C
-
-Test1 - Nr Alese -  8
-9 P
-A C
-K I
-J P
-9 C
-8 I
-K P
-J C
-
-Test2 - Nr Alese -  1
-K C
 A T
-8 T
-J I
-Q P
-Q I
-A I
-A P
+J C
+K I
+T C
+K T
+J T
+T I
 
-TTCO  : K T
-Test1 : 9 P
-Test2 : K C
-CASTIGATOR RUNDA 0 TTCO 
-TTCO  : 8 P
-Test1 : A C
-Test2 : A T
-CASTIGATOR RUNDA 1 Test1
-Test1 : K I
-Test2 : 8 T
+Test1 - Nr Alese -  2
+9 P
+K C
+J I
+Q I
+9 C
+A C
+Q C
+9 T
+
+Test2 - Nr Alese -  0
+Q P
+T T
+T P
+A P
+A I
+K P
+9 I
+J P
+
 TTCO  : Q T
-CASTIGATOR RUNDA 2 Test1
-Test1 : J P
-Test2 : J I
-TTCO  : J T
-CASTIGATOR RUNDA 3 Test1
-Test1 : 9 C
+Test1 : 9 P
 Test2 : Q P
-TTCO  : 9 T
-CASTIGATOR RUNDA 4 Test2
-Test2 : Q I
-TTCO  : 8 C
-Test1 : K P
-CASTIGATOR RUNDA 5 Test1
-Test1 : 8 I
+CASTIGATOR RUNDA 0 TTCO 
+TTCO  : A T
+Test1 : K C
+Test2 : T P
+CASTIGATOR RUNDA 1 TTCO 
+TTCO  : J C
+Test1 : J I
+Test2 : T T
+CASTIGATOR RUNDA 2 TTCO 
+TTCO  : K I
+Test1 : 9 C
 Test2 : A P
-TTCO  : Q C
-CASTIGATOR RUNDA 6 Test2
+CASTIGATOR RUNDA 3 Test2
 Test2 : A I
-TTCO  : 9 I
-Test1 : J C
+TTCO  : T C
+Test1 : A C
+CASTIGATOR RUNDA 4 Test2
+Test2 : K P
+TTCO  : K T
+Test1 : Q I
+CASTIGATOR RUNDA 5 Test2
+Test2 : 9 I
+TTCO  : J T
+Test1 : Q C
+CASTIGATOR RUNDA 6 Test1
+Test1 : 9 T
+Test2 : J P
+TTCO  : T I
 CASTIGATOR RUNDA 7 Test2
 
-TTCO  : -21 
-Test1 :   1 
-Test2 :  12 
+TTCO  :   2 
+Test1 :   3 
+#Test2 :  -6 
 
-RANDOM SHUFFLE SEED : 1908573876
+RANDOM SHUFFLE SEED : -851428116
 
 ------MECI 10------
 
 
 TTCO  - Nr Alese -  5
-8 T
-Q C
-J T
-J C
-Q P
-8 P
-J P
-9 C
-
-Test1 - Nr Alese -  7
-K I
 J I
-8 C
-A P
-K C
-9 P
-K T
-9 I
-
-Test2 - Nr Alese -  5
-Q I
-K P
-Q T
-A I
 A C
-9 T
-8 I
+T I
+K P
+K I
+9 C
+J P
 A T
 
-Test1 : K I
-Test2 : K P
-TTCO  : 8 T
+Test1 - Nr Alese -  6
+Q P
+Q T
+A I
+9 I
+J C
+9 P
+K C
+9 T
+
+Test2 - Nr Alese -  5
+T C
+A P
+Q C
+Q I
+K T
+T T
+T P
+J T
+
+Test1 : Q P
+Test2 : T C
+TTCO  : J I
 CASTIGATOR RUNDA 0 Test1
-Test1 : J I
-Test2 : Q T
-TTCO  : Q C
+Test1 : Q T
+Test2 : A P
+TTCO  : A C
 CASTIGATOR RUNDA 1 Test2
-Test2 : Q I
-TTCO  : J T
-Test1 : 8 C
-CASTIGATOR RUNDA 2 Test2
-Test2 : A I
-TTCO  : J C
-Test1 : A P
-CASTIGATOR RUNDA 3 Test2
-Test2 : A C
-TTCO  : Q P
-Test1 : 9 P
-CASTIGATOR RUNDA 4 Test2
-Test2 : 9 T
-TTCO  : 8 P
-Test1 : K C
-CASTIGATOR RUNDA 5 Test1
-Test1 : K T
-Test2 : 8 I
-TTCO  : J P
-CASTIGATOR RUNDA 6 Test1
+Test2 : Q C
+TTCO  : T I
+Test1 : A I
+CASTIGATOR RUNDA 2 Test1
 Test1 : 9 I
-Test2 : A T
+Test2 : K T
+TTCO  : K P
+CASTIGATOR RUNDA 3 Test2
+Test2 : Q I
 TTCO  : 9 C
-CASTIGATOR RUNDA 7 Test2
+Test1 : J C
+CASTIGATOR RUNDA 4 Test2
+Test2 : T T
+TTCO  : K I
+Test1 : 9 P
+CASTIGATOR RUNDA 5 TTCO 
+TTCO  : J P
+Test1 : K C
+Test2 : J T
+CASTIGATOR RUNDA 6 Test1
+Test1 : 9 T
+Test2 : T P
+TTCO  : A T
+CASTIGATOR RUNDA 7 TTCO 
 
-TTCO  : -26 
-Test1 :  -3 
-Test2 :  22 
+TTCO  :  -1 
+Test1 :   0 
+Test2 :  -8 
 
-RANDOM SHUFFLE SEED : 1908573876
+RANDOM SHUFFLE SEED : -851428116
 
 ------MECI 11------
 
 
-TTCO  - Nr Alese -  6
-8 P
-8 I
-8 C
-J P
-K P
-9 P
-9 T
-Q C
-
-Test1 - Nr Alese -  6
-J T
-9 I
-A P
-A T
-Q P
-J I
-A I
-A C
-
-Test2 - Nr Alese -  7
-Q T
+TTCO  - Nr Alese -  1
 J C
-K C
-9 C
-8 T
+K P
+T P
 Q I
-K I
+9 P
+A C
+T I
+K C
+
+Test1 - Nr Alese -  2
+Q C
+T T
+9 T
+9 C
+9 I
 K T
+A T
+Q T
 
-Test2 : Q T
-TTCO  : 8 P
-Test1 : 9 I
-CASTIGATOR RUNDA 0 Test2
-Test2 : J C
-TTCO  : 8 I
-Test1 : J T
-CASTIGATOR RUNDA 1 Test2
-Test2 : K C
-TTCO  : J P
-Test1 : A P
-CASTIGATOR RUNDA 2 Test1
-Test1 : A T
-Test2 : 9 C
-TTCO  : 8 C
-CASTIGATOR RUNDA 3 Test1
-Test1 : Q P
-Test2 : 8 T
-TTCO  : 9 T
-CASTIGATOR RUNDA 4 Test1
-Test1 : J I
-Test2 : K T
+Test2 - Nr Alese -  6
+J I
+Q P
+K I
+J P
+A I
+T C
+A P
+J T
+
+Test2 : J I
+TTCO  : J C
+Test1 : Q C
+CASTIGATOR RUNDA 0 Test1
+Test1 : T T
+Test2 : Q P
 TTCO  : K P
-CASTIGATOR RUNDA 5 Test2
-Test2 : Q I
-TTCO  : 9 P
-Test1 : A C
-CASTIGATOR RUNDA 6 Test1
-Test1 : A I
+CASTIGATOR RUNDA 1 TTCO 
+TTCO  : T P
+Test1 : 9 T
 Test2 : K I
-TTCO  : Q C
-CASTIGATOR RUNDA 7 Test1
+CASTIGATOR RUNDA 2 Test2
+Test2 : J P
+TTCO  : Q I
+Test1 : 9 C
+CASTIGATOR RUNDA 3 TTCO 
+TTCO  : 9 P
+Test1 : 9 I
+Test2 : A I
+CASTIGATOR RUNDA 4 Test2
+Test2 : T C
+TTCO  : T I
+Test1 : K T
+CASTIGATOR RUNDA 5 Test1
+Test1 : A T
+Test2 : A P
+TTCO  : A C
+CASTIGATOR RUNDA 6 Test1
+Test1 : Q T
+Test2 : J T
+TTCO  : K C
+CASTIGATOR RUNDA 7 TTCO 
 
-#TTCO  : -42 
-Test1 :  -4 
-Test2 :  18 
+TTCO  :  -3 
+Test1 :  -1 
+Test2 : -12 
 
-RANDOM SHUFFLE SEED : 1908573876
+RANDOM SHUFFLE SEED : -851428116
 
 ------MECI 12------
 
-Atu -- K I --
+Atu -- K C --
 
-TTCO  - Nr Alese -  5
-8 C
+TTCO  - Nr Alese -  2
+Q C
+J I
+9 I
 A T
-8 T
+K I
+J C
+K P
+
+Test1 - Nr Alese -  4
+A I
+9 C
+T I
+Q I
+T C
+T T
+9 T
+
+Test2 - Nr Alese -  4
+T P
 A C
 J T
-8 P
+K T
+J P
+9 P
 Q T
 
-Test1 - Nr Alese -  3
-J I
-9 T
-K C
-A I
-8 I
-Q I
-9 P
-
-Test2 - Nr Alese -  0
-A P
-K T
-9 C
-Q C
-Q P
-J C
-J P
-
-TTCO  : 8 C
-Test1 : J I
-Test2 : A P
-CASTIGATOR RUNDA 0 Test1
-Test1 : 9 T
-Test2 : 9 C
-TTCO  : A C
-CASTIGATOR RUNDA 1 TTCO 
-TTCO  : A T
-Test1 : K C
-Test2 : Q C
-CASTIGATOR RUNDA 2 TTCO 
-TTCO  : 8 T
+TTCO  : Q C
 Test1 : A I
-Test2 : Q P
-CASTIGATOR RUNDA 3 Test1
-Test1 : 8 I
+Test2 : T P
+CASTIGATOR RUNDA 0 TTCO 
+TTCO  : J I
+Test1 : 9 C
+Test2 : A C
+CASTIGATOR RUNDA 1 Test2
+Test2 : J T
+TTCO  : 9 I
+Test1 : T I
+CASTIGATOR RUNDA 2 Test2
 Test2 : K T
-TTCO  : J T
-CASTIGATOR RUNDA 4 Test1
+TTCO  : K I
 Test1 : Q I
-Test2 : J C
-TTCO  : 8 P
-CASTIGATOR RUNDA 5 Test1
-Test1 : 9 P
+CASTIGATOR RUNDA 3 Test2
 Test2 : J P
-TTCO  : Q T
+TTCO  : A T
+Test1 : T C
+CASTIGATOR RUNDA 4 Test1
+Test1 : T T
+Test2 : 9 P
+TTCO  : J C
+CASTIGATOR RUNDA 5 TTCO 
+TTCO  : K P
+Test1 : 9 T
+Test2 : Q T
 CASTIGATOR RUNDA 6 TTCO 
 
-TTCO  : -44 
-Test1 :  -5 
-Test2 :  23 
+TTCO  :  -4 
+Test1 :  -4 
+Test2 : -13 
 
-RANDOM SHUFFLE SEED : 1908573876
+RANDOM SHUFFLE SEED : -851428116
 
 ------MECI 13------
 
-Atu -- 8 C --
+Atu -- 9 C --
 
-TTCO  - Nr Alese -  6
-9 C
-K I
-A C
-9 I
-Q P
-A T
-
-Test1 - Nr Alese -  5
+TTCO  - Nr Alese -  5
+T I
+T T
 K C
-Q C
-J T
-K P
-A P
-J I
-
-Test2 - Nr Alese -  2
-J C
 9 P
-8 T
+A T
+T C
+
+Test1 - Nr Alese -  2
+T P
+Q C
 J P
+Q T
+9 I
+A I
+
+Test2 - Nr Alese -  3
+K I
+K T
 9 T
-8 P
+Q I
+J C
+A C
 
-Test1 : K C
-Test2 : 9 P
-TTCO  : K I
-CASTIGATOR RUNDA 0 Test1
+Test1 : T P
+Test2 : K I
+TTCO  : T I
+CASTIGATOR RUNDA 0 Test2
+Test2 : K T
+TTCO  : K C
 Test1 : Q C
-Test2 : 8 T
-TTCO  : 9 I
-CASTIGATOR RUNDA 1 Test1
-Test1 : J T
-Test2 : J C
-TTCO  : 9 C
+CASTIGATOR RUNDA 1 TTCO 
+TTCO  : T T
+Test1 : J P
+Test2 : Q I
 CASTIGATOR RUNDA 2 Test2
-Test2 : J P
-TTCO  : A C
-Test1 : J I
-CASTIGATOR RUNDA 3 TTCO 
-TTCO  : Q P
-Test1 : K P
 Test2 : 9 T
-CASTIGATOR RUNDA 4 Test1
-Test1 : A P
-Test2 : 8 P
+TTCO  : 9 P
+Test1 : 9 I
+CASTIGATOR RUNDA 3 Test2
+Test2 : J C
 TTCO  : A T
-CASTIGATOR RUNDA 5 Test1
+Test1 : Q T
+CASTIGATOR RUNDA 4 Test2
+Test2 : A C
+TTCO  : T C
+Test1 : A I
+CASTIGATOR RUNDA 5 Test2
 
-TTCO  : -49 
+TTCO  :  -8 
 Test1 :  -6 
-Test2 :  22 
+Test2 : -15 
 
-RANDOM SHUFFLE SEED : 1908573876
+RANDOM SHUFFLE SEED : -851428116
 
 ------MECI 14------
 
-Atu -- J C --
+Atu -- K I --
 
-TTCO  - Nr Alese -  0
-A T
-Q I
-J T
-A I
-9 P
-
-Test1 - Nr Alese -  5
-A C
-Q T
-K P
-K T
-Q P
-
-Test2 - Nr Alese -  2
-8 T
+TTCO  - Nr Alese -  4
 9 I
+9 P
+J T
+Q I
+A I
+
+Test1 - Nr Alese -  0
+9 T
+A C
 A P
-8 I
-9 C
+T C
+Q T
 
-Test2 : 8 T
-TTCO  : Q I
-Test1 : A C
-CASTIGATOR RUNDA 0 Test1
-Test1 : Q T
-Test2 : 9 I
-TTCO  : A I
-CASTIGATOR RUNDA 1 TTCO 
-TTCO  : A T
-Test1 : K P
-Test2 : A P
-CASTIGATOR RUNDA 2 TTCO 
-TTCO  : J T
-Test1 : Q P
-Test2 : 8 I
-CASTIGATOR RUNDA 3 Test1
-Test1 : K T
-Test2 : 9 C
+Test2 - Nr Alese -  0
+T I
+T P
+A T
+Q P
+J P
+
+Test2 : T I
 TTCO  : 9 P
-CASTIGATOR RUNDA 4 Test2
+Test1 : 9 T
+CASTIGATOR RUNDA 0 Test2
+Test2 : T P
+TTCO  : 9 I
+Test1 : A C
+CASTIGATOR RUNDA 1 TTCO 
+TTCO  : J T
+Test1 : A P
+Test2 : Q P
+CASTIGATOR RUNDA 2 Test1
+Test1 : T C
+Test2 : A T
+TTCO  : Q I
+CASTIGATOR RUNDA 3 TTCO 
+TTCO  : A I
+Test1 : Q T
+Test2 : J P
+CASTIGATOR RUNDA 4 TTCO 
 
-TTCO  : -51 
-Test1 :  -9 
-Test2 :  21 
+TTCO  :  -9 
+Test1 :  -7 
+#Test2 : -26 
 
-RANDOM SHUFFLE SEED : 1908573876
+RANDOM SHUFFLE SEED : -851428116
 
 ------MECI 15------
 
-Atu -- A C --
+Atu -- A T --
 
-TTCO  - Nr Alese -  1
-J T
-K T
-9 C
+TTCO  - Nr Alese -  3
 9 T
+T I
+Q T
+J I
 
-Test1 - Nr Alese -  4
-Q C
-8 P
-A P
+Test1 - Nr Alese -  0
 J P
+T C
+K C
+Q I
 
 Test2 - Nr Alese -  2
+J T
+T T
 K P
-8 C
-8 I
-K I
+J C
 
-TTCO  : J T
-Test1 : Q C
-Test2 : K P
-CASTIGATOR RUNDA 0 Test1
-Test1 : 8 P
-Test2 : 8 C
-TTCO  : K T
-CASTIGATOR RUNDA 1 Test2
-Test2 : 8 I
-TTCO  : 9 C
-Test1 : A P
-CASTIGATOR RUNDA 2 TTCO 
 TTCO  : 9 T
 Test1 : J P
-Test2 : K I
-CASTIGATOR RUNDA 3 Test2
+Test2 : K P
+CASTIGATOR RUNDA 0 TTCO 
+TTCO  : T I
+Test1 : T C
+Test2 : J T
+CASTIGATOR RUNDA 1 Test2
+Test2 : T T
+TTCO  : J I
+Test1 : K C
+CASTIGATOR RUNDA 2 Test2
+Test2 : J C
+TTCO  : Q T
+Test1 : Q I
+CASTIGATOR RUNDA 3 TTCO 
 
-TTCO  : -45 
-Test1 : -12 
-Test2 :  28 
+TTCO  : -10 
+Test1 :  -2 
+Test2 : -19 
 
-RANDOM SHUFFLE SEED : 1908573876
+RANDOM SHUFFLE SEED : -851428116
 
 ------MECI 16------
 
-Atu -- 9 P --
+Atu -- Q C --
 
-TTCO  - Nr Alese -  2
-8 I
+TTCO  - Nr Alese -  3
 K C
-9 T
-
-Test1 - Nr Alese -  0
-A P
-K I
 A C
-
-Test2 - Nr Alese -  0
-9 I
-J I
 9 C
 
-Test1 : A P
-Test2 : 9 I
-TTCO  : 8 I
-CASTIGATOR RUNDA 0 Test1
-Test1 : K I
-Test2 : 9 C
+Test1 - Nr Alese -  2
+J T
+9 T
+Q P
+
+Test2 - Nr Alese -  0
+A T
+J C
+A P
+
+Test1 : J T
+Test2 : J C
 TTCO  : K C
-CASTIGATOR RUNDA 1 Test1
-Test1 : A C
-Test2 : J I
-TTCO  : 9 T
-CASTIGATOR RUNDA 2 Test1
+CASTIGATOR RUNDA 0 TTCO 
+TTCO  : A C
+Test1 : 9 T
+Test2 : A T
+CASTIGATOR RUNDA 1 TTCO 
+TTCO  : 9 C
+Test1 : Q P
+Test2 : A P
+CASTIGATOR RUNDA 2 TTCO 
 
-TTCO  : -47 
-Test1 : -15 
-Test2 :  33 
+TTCO  :  -2 
+Test1 :  -4 
+Test2 : -14 
 
-RANDOM SHUFFLE SEED : 1908573876
+RANDOM SHUFFLE SEED : -851428116
 
 ------MECI 17------
 
-Atu -- K P --
+Atu -- J I --
 
 TTCO  - Nr Alese -  1
-K T
-J C
-
-Test1 - Nr Alese -  2
-9 T
-8 T
-
-Test2 - Nr Alese -  0
-9 C
 Q T
-
-Test2 : 9 C
-TTCO  : K T
-Test1 : 9 T
-CASTIGATOR RUNDA 0 TTCO 
-TTCO  : J C
-Test1 : 8 T
-Test2 : Q T
-CASTIGATOR RUNDA 1 Test2
-
-TTCO  : -41 
-Test1 : -17 
-Test2 :  32 
-
-RANDOM SHUFFLE SEED : 1908573876
-
-------MECI 18------
-
-Atu -- 8 C --
-
-TTCO  - Nr Alese -  0
-A C
+A I
 
 Test1 - Nr Alese -  0
-K I
+A P
+T T
 
 Test2 - Nr Alese -  0
-9 P
+K C
+J T
 
-TTCO  : A C
-Test1 : K I
-Test2 : 9 P
-CASTIGATOR RUNDA 0 TTCO 
+Test2 : K C
+TTCO  : Q T
+Test1 : A P
+CASTIGATOR RUNDA 0 Test1
+Test1 : T T
+Test2 : J T
+TTCO  : A I
+CASTIGATOR RUNDA 1 TTCO 
 
-TTCO  : -42 
-Test1 : -12 
-Test2 :  37 
+TTCO  :   4 
+Test1 :  -5 
+Test2 :  -9 
 
-RANDOM SHUFFLE SEED : 1908573876
+RANDOM SHUFFLE SEED : -851428116
 
-------MECI 19------
+------MECI 18------
 
 Atu -- K C --
 
 TTCO  - Nr Alese -  0
-Q I
+A P
+
+Test1 - Nr Alese -  0
+Q P
+
+Test2 - Nr Alese -  0
+K P
+
+TTCO  : A P
+Test1 : Q P
+Test2 : K P
+CASTIGATOR RUNDA 0 TTCO 
+
+TTCO  :   3 
+Test1 :   0 
+Test2 :  -4 
+
+RANDOM SHUFFLE SEED : -851428116
+
+------MECI 19------
+
+Atu -- A P --
+
+TTCO  - Nr Alese -  0
+9 C
 
 Test1 - Nr Alese -  0
 K P
 
 Test2 - Nr Alese -  0
-Q T
+J I
 
 Test1 : K P
-Test2 : Q T
-TTCO  : Q I
+Test2 : J I
+TTCO  : 9 C
 CASTIGATOR RUNDA 0 Test1
 
-TTCO  : -37 
-Test1 : -13 
-Test2 :  42 
+TTCO  :   8 
+Test1 :  -1 
+#Test2 :  11 
 
-RANDOM SHUFFLE SEED : 1908573876
+RANDOM SHUFFLE SEED : -851428116
 
 ------MECI 20------
 
-Atu -- 8 T --
+Atu -- K P --
 
 TTCO  - Nr Alese -  0
-8 C
+Q C
 
 Test1 - Nr Alese -  0
-8 P
+K T
 
 Test2 - Nr Alese -  0
-8 I
+9 C
 
-Test2 : 8 I
-TTCO  : 8 C
-Test1 : 8 P
-CASTIGATOR RUNDA 0 Test2
+Test2 : 9 C
+TTCO  : Q C
+Test1 : K T
+CASTIGATOR RUNDA 0 Test1
 
-TTCO  : -32 
-Test1 :  -8 
-Test2 :  41 
+TTCO  :  13 
+Test1 :  -2 
+Test2 :  16 
 
 
 
 ---SCOR  FINAL---
-TTCO   0 = -32
-Test1  1 =  -8
-Test2  2 =  41 WINNER
+TTCO   0 =  13
+Test1  1 =  -2
+Test2  2 =  16 WINNER

@@ -25,7 +25,7 @@ using namespace std;
 ///P-Pica(Inima Neagra)
 ///T-Trefla
 
-///Cartile sunt 1,2,3,4,5,6,7,8,9,J,Q,K,A (in aceasta ordine)
+///Cartile sunt 2,3,4,5,6,7,8,9,T,J,Q,K,A (in aceasta ordine)
 
 ///Reguli :
 /*
@@ -74,7 +74,7 @@ FILE *fout;
 PRIVATEPLAYER date[MAXN];
 CARTE cartiOrd[PACHET];
 char culoriPosibile[MAXCULORI]={'I','C','P','T'}; ///Putem sa le schimbam
-char tipuriCarti[MAXTIPURICARTI]={'1','2','3','4','5','6','7','8','9','J','Q','K','A'}; ///Putem sa le schimbam
+char tipuriCarti[MAXTIPURICARTI]={'2','3','4','5','6','7','8','9','T','J','Q','K','A'}; ///Putem sa le schimbam
 int nrCartiPachet;
 int nrMeci;
 int n;
