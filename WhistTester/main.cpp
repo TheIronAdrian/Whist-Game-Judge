@@ -20,6 +20,7 @@
 #define MAXTIPURICARTI 13
 #define CONSTWINSTREAK 5
 #define WINSTREAKPOINTS 10
+#define ENCRYPT 256
 
 using namespace std;
 
@@ -58,7 +59,6 @@ struct PRIVATEPLAYER{
   //AGhici SetGhicit;
   //ADaCarte GiveCarte;
   string SetGhicit;
-  string GiveCarte;
   CARTE carti[MAXT];
   char name[MAXNNAME];
   int puncte;
@@ -83,109 +83,6 @@ char tipuriCarti[MAXTIPURICARTI]={'2','3','4','5','6','7','8','9','T','J','Q','K
 int nrCartiPachet;
 int nrMeci;
 int n;
-
-///----------------FunctiiJucatori----------
-
-string NumberToString(int nr){
-  int put;
-  char aux;
-  string ans=" ";
-
-  if(nr<0){
-    ans=ans+"-";
-    nr=-nr;
-  }
-
-  if(nr==0){
-    return " 0";
-  }
-
-  put=1;
-  while(put<=nr){
-    put*=10;
-  }
-  put/=10;
-
-  while(put>0){
-    aux=(nr/put)%10+'0';
-    ans=ans+aux;
-    put/=10;
-  }
-
-  ans=ans+" ";
-
-  return ans;
-}
-
-string CharToString(char nr){
-
-  if(nr<0){
-    return " -1";
-  }
-
-  return " "+nr;
-}
-
-int PlayerGhicit(int player,int joc,CARTE cartiPers[MAXT],PUBLICPLAYER datePublice[MAXN],CARTE Atu){
-  int i,j,val;
-  string strcommand;
-
-  strcommand=date[player].SetGhicit;
-
-  strcommand=strcommand+NumberToString(joc);
-  strcommand=strcommand+NumberToString(n);
-  strcommand=strcommand+NumberToString(player);
-
-  for(i=0;i<joc;i++){
-    strcommand=strcommand+" ";
-    strcommand=strcommand+cartiPers[i].val;
-    strcommand=strcommand+cartiPers[i].culoare;
-    //cout << strcommand;
-  }
-
-  for(i=0;i<n;i++){
-    strcommand=strcommand+NumberToString(datePublice[i].puncte);
-    strcommand=strcommand+NumberToString(datePublice[i].contorStreak);
-    strcommand=strcommand+NumberToString(datePublice[i].valGhicita);
-    strcommand=strcommand+NumberToString(datePublice[i].nrCastiguri);
-
-    for(j=0;j<joc;j++){
-      strcommand=strcommand+" ";
-      if(datePublice[i].cartiFolosite[j].val!=-1){
-        strcommand=strcommand+datePublice[i].cartiFolosite[j].val;
-        strcommand=strcommand+datePublice[i].cartiFolosite[j].culoare;
-      }else{
-        strcommand=strcommand+"++";
-      }
-    }
-  }
-
-  strcommand=strcommand+" ";
-  strcommand=strcommand+Atu.val;
-  strcommand=strcommand+Atu.culoare;
-
-  val=system((strcommand).c_str());
-
-  if()
-
-  return val;
-}
-
-int PlayerCarte(int player,int joc,CARTE cartiPers[MAXT],PUBLICPLAYER datePublice[MAXN],CARTE Atu,CARTE PrimaCarte){
-  int i,val;
-  string strcommand;
-
-  strcommand=date[player].GiveCarte;
-
-
-
-  val=system((strcommand).c_str());
-
-  return val;
-}
-
-///----------------FunctiiJucatori----------
-
 
 ///----------------FunctiiExemple----------
 
@@ -244,6 +141,179 @@ int TestGiveCarte(int joc,CARTE cartiPers[MAXT],PUBLICPLAYER datePublice[MAXN],C
 }
 
 ///----------------FunctiiExemple----------
+
+
+bool CheckValiditateCarte(int carteaData,int jucator,int nrCarti,CARTE Atu,CARTE PrimaPusa);
+int FindCarte(CARTE carteaData,int jucator);
+///----------------FunctiiJucatori----------
+
+string NumberToString(int nr){
+  int put;
+  char aux;
+  string ans=" ";
+
+  if(nr<0){
+    ans=ans+"-";
+    nr=-nr;
+  }
+
+  if(nr==0){
+    return " 0";
+  }
+
+  put=1;
+  while(put<=nr){
+    put*=10;
+  }
+  put/=10;
+
+  while(put>0){
+    aux=(nr/put)%10+'0';
+    ans=ans+aux;
+    put/=10;
+  }
+
+  ans=ans+" ";
+
+  return ans;
+}
+
+string CharToString(char nr){
+
+  if(nr<0){
+    return " -1";
+  }
+
+  return " "+nr;
+}
+
+string FormArgc(string strcommand,int player,int joc,CARTE cartiPers[MAXT],PUBLICPLAYER datePublice[MAXN],CARTE Atu){
+  int i,j;
+
+  strcommand=strcommand+NumberToString(joc);
+  strcommand=strcommand+NumberToString(n);
+  strcommand=strcommand+NumberToString(player);
+
+  for(i=0;i<joc;i++){
+    strcommand=strcommand+" ";
+    strcommand=strcommand+cartiPers[i].val;
+    strcommand=strcommand+cartiPers[i].culoare;
+    //cout << strcommand;
+  }
+
+  for(i=0;i<n;i++){
+    strcommand=strcommand+NumberToString(datePublice[i].puncte);
+    strcommand=strcommand+NumberToString(datePublice[i].contorStreak);
+    strcommand=strcommand+NumberToString(datePublice[i].valGhicita);
+    strcommand=strcommand+NumberToString(datePublice[i].nrCastiguri);
+
+    for(j=0;j<joc;j++){
+      strcommand=strcommand+" ";
+      if(datePublice[i].cartiFolosite[j].val!=-1){
+        strcommand=strcommand+datePublice[i].cartiFolosite[j].val;
+        strcommand=strcommand+datePublice[i].cartiFolosite[j].culoare;
+      }else{
+        strcommand=strcommand+"++";
+      }
+    }
+  }
+
+  strcommand=strcommand+" ";
+  if(Atu.val!=-1){
+    strcommand=strcommand+Atu.val;
+    strcommand=strcommand+Atu.culoare;
+  }else{
+    strcommand=strcommand+"++";
+  }
+
+  return strcommand;
+}
+
+int PlayerGhicit(int player,int joc,CARTE cartiPers[MAXT],PUBLICPLAYER datePublice[MAXN],CARTE Atu,int isLast,int sumGhic){
+  int i,j,val,good;
+  string strcommand;
+
+  strcommand=FormArgc(date[player].SetGhicit,player,joc,cartiPers,datePublice,Atu);
+
+  strcommand=strcommand+" -";
+
+  val=system((strcommand).c_str());
+
+  ///Check if is correct the card that was given
+
+  good=1;
+
+  if(isLast==1 && sumGhic==val){
+    good=0;
+  }
+
+  if(val<0 || val>joc){
+    good=0;
+  }
+
+  if(good==0){
+    val=TestSetGhicit(joc,cartiPers,datePublice,Atu);
+  }
+
+  return val;
+}
+
+int PlayerCarte(int player,int joc,CARTE cartiPers[MAXT],PUBLICPLAYER datePublice[MAXN],CARTE Atu,CARTE PrimaCarte){
+  int i,val,aux,good;
+  CARTE rasp;
+  string strcommand;
+
+  strcommand=FormArgc(date[player].SetGhicit,player,joc,cartiPers,datePublice,Atu);
+
+  strcommand=strcommand+" +";
+
+  strcommand=strcommand+" ";
+  strcommand=strcommand+PrimaCarte.val;
+  strcommand=strcommand+PrimaCarte.culoare;
+
+  //cout << strcommand << '\n';
+
+  aux=system((strcommand).c_str());
+
+  rasp.val=aux/ENCRYPT;
+  rasp.culoare=aux%ENCRYPT;
+
+  val=FindCarte(rasp,player);
+
+  if(val==-1){
+    good=0;
+  }else{
+    if(CheckValiditateCarte(val,player,joc,Atu,PrimaCarte)==0){
+      good=0;
+    }
+  }
+
+  if(good==0){
+    fprintf(fout,"!");
+    val=TestGiveCarte(joc,cartiPers,datePublice,Atu,PrimaCarte);
+  }
+
+  return val;
+}
+
+///----------------FunctiiJucatori----------
+
+int FindCarte(CARTE carteaData,int jucator){
+  int i;
+
+  i=0;
+  while(i<MAXT){
+    if(date[jucator].carti[i].culoare==carteaData.culoare && date[jucator].carti[i].val==carteaData.val){
+      if(date[jucator].carti[i].used==1){
+        return -1;
+      }
+      return i;
+    }
+    i++;
+  }
+
+  return -1;
+}
 
 int CalculPutereCarte(char a){
   int z,aux;
@@ -319,9 +389,16 @@ bool CheckValiditateCarte(int carteaData,int jucator,int nrCarti,CARTE Atu,CARTE
 
   aux=date[jucator].carti[carteaData];
 
-  assert(!(carteaData<0 || carteaData>nrCarti) && "Cartea Data Out Of Bounds");
+  //assert(!(carteaData<0 || carteaData>nrCarti) && "Cartea Data Out Of Bounds");
 
-  assert(aux.used==0 && "Cartea Data A Fost Folosita Deja");
+  //assert(aux.used==0 && "Cartea Data A Fost Folosita Deja");
+
+  if(!(carteaData<0 || carteaData>nrCarti)){
+    return 0;
+  }
+  if(aux.used==0){
+    return 0;
+  }
 
   if(aux.culoare==PrimaPusa.culoare){
     return 1;
@@ -332,7 +409,10 @@ bool CheckValiditateCarte(int carteaData,int jucator,int nrCarti,CARTE Atu,CARTE
     i++;
   }
 
-  assert(i>=nrCarti && "Cartea Data Nu Respecta Culoarea");
+  //assert(i>=nrCarti && "Cartea Data Nu Respecta Culoarea");
+  if(i>=nrCarti){
+    return 0;
+  }
 
   if(Atu.culoare==-1 || date[jucator].carti[carteaData].culoare==Atu.culoare){
     return 1;
@@ -343,7 +423,10 @@ bool CheckValiditateCarte(int carteaData,int jucator,int nrCarti,CARTE Atu,CARTE
     i++;
   }
 
-  assert(i>=nrCarti && "Cartea Data Nu Este Atu");
+  //assert(i>=nrCarti && "Cartea Data Nu Este Atu");
+  if(i>=nrCarti){
+    return 0;
+  }
 
   return 1;
 }
@@ -405,17 +488,13 @@ int Joc(int nrCarti,int firstPlayer){
   s=0;
   i=firstPlayer;
   for(c=1;c<n;c++){
-    date[i].valGhicita=PlayerGhicit(i,nrCarti,date[i].carti,datePublice,Atu);
+    date[i].valGhicita=PlayerGhicit(i,nrCarti,date[i].carti,datePublice,Atu,0,0);
     datePublice[i].valGhicita=date[i].valGhicita;
-    assert(date[i].valGhicita<=nrCarti && date[i].valGhicita>=0 && "Ai ghicit un numar de carti imposibil");
     s+=date[i].valGhicita;
     i=(i+1)%n;
   }
-  date[i].valGhicita=PlayerGhicit(i,nrCarti,date[i].carti,datePublice,Atu);
+  date[i].valGhicita=PlayerGhicit(i,nrCarti,date[i].carti,datePublice,Atu,1,nrCarti-s);
   datePublice[i].valGhicita=date[i].valGhicita;
-
-  assert(date[i].valGhicita<=nrCarti && date[i].valGhicita>=0 && "Ai ghicit un numar de carti imposibil");
-  assert(date[i].valGhicita!=nrCarti-s && "Ultima persoana a spus fix numarul carti pe care nu are voie");
 
   ///-----------------Final Zona Ghicit------------------------
 
@@ -429,8 +508,6 @@ int Joc(int nrCarti,int firstPlayer){
 
     aux=PlayerCarte(x,nrCarti,date[i].carti,datePublice,Atu,{-1,-1,-1});
 
-    CheckValiditateCarte(aux,i,nrCarti,Atu,{-1,-1,-1});
-
     date[i].carti[aux].used=1;
     carteJucator=date[i].carti[aux];
     datePublice[i].cartiFolosite[z]=date[i].carti[aux];
@@ -443,7 +520,6 @@ int Joc(int nrCarti,int firstPlayer){
     for(c=1;c<n;c++){
       i=(i+1)%n;
       aux=PlayerCarte(i,nrCarti,date[i].carti,datePublice,Atu,primaCarte);
-      CheckValiditateCarte(aux,i,nrCarti,Atu,primaCarte);
 
       date[i].carti[aux].used=1;
       carteJucator=date[i].carti[aux];
@@ -510,13 +586,9 @@ void Init(){
   date[1].GiveCarte=TestGiveCarte;
   date[2].GiveCarte=TestGiveCarte;*/
 
-  date[0].SetGhicit="bin\\Debug\\set.exe ";
-  date[1].SetGhicit="bin\\Debug\\set.exe ";
-  date[2].SetGhicit="bin\\Debug\\set.exe ";
-
-  date[0].GiveCarte="bin\\Debug\\give.exe ";
-  date[1].GiveCarte="bin\\Debug\\give.exe ";
-  date[2].GiveCarte="bin\\Debug\\give.exe ";
+  date[0].SetGhicit="bin\\Debug\\Set.exe ";
+  date[1].SetGhicit="bin\\Debug\\Set.exe ";
+  date[2].SetGhicit="bin\\Debug\\Set.exe ";
 
   strcpy(date[0].name,  "TTCO ");
   strcpy(date[1].name,  "Test1");
