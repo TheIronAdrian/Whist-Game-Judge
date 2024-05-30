@@ -117,7 +117,7 @@ int TestGiveCarte(int joc,CARTE cartiPers[MAXT],PUBLICPLAYER datePublice[MAXN],C
   }
 
   x=0;
-  while(x<joc && (cartiPers[x].used!=0 || cartiPers[x].culoare==PrimaCarte.culoare)){
+  while(x<joc && (cartiPers[x].used!=0 || cartiPers[x].culoare!=PrimaCarte.culoare)){
     x++;
   }
   if(x<joc){
@@ -125,7 +125,7 @@ int TestGiveCarte(int joc,CARTE cartiPers[MAXT],PUBLICPLAYER datePublice[MAXN],C
   }
 
   x=0;
-  while(x<joc && (cartiPers[x].used!=0 || cartiPers[x].culoare==Atu.culoare)){
+  while(x<joc && (cartiPers[x].used!=0 || cartiPers[x].culoare!=Atu.culoare)){
     x++;
   }
   if(x<joc){
@@ -280,6 +280,8 @@ int PlayerCarte(int player,int joc,CARTE cartiPers[MAXT],PUBLICPLAYER datePublic
 
   val=FindCarte(rasp,player);
 
+  good=1;
+
   if(val==-1){
     good=0;
   }else{
@@ -341,15 +343,22 @@ CARTE InitMana(int nrCarti,int firstPlayer){
 
   unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
   fprintf(fout,"RANDOM SHUFFLE SEED : %d\n",seed);
+
   std::default_random_engine rng(seed);
 
   shuffle(cartiOrd,cartiOrd+nrCartiPachet,rng);
 
   /*
-  cartiOrd[0]={'A','C',0};
-  cartiOrd[1]={'9','T',0};
-  cartiOrd[2]={'A','I',0};
-  cartiOrd[3]={'9','P',0};
+  cartiOrd[0]={'T','T',0};
+  cartiOrd[1]={'A','T',0};
+  cartiOrd[2]={'9','P',0};
+  cartiOrd[3]={'Q','I',0};
+  cartiOrd[4]={'A','I',0};
+  cartiOrd[5]={'K','I',0};
+  cartiOrd[6]={'Q','C',0};
+  cartiOrd[7]={'T','C',0};
+  cartiOrd[8]={'J','C',0};
+  cartiOrd[9]={'T','P',0};
   //*/
 
   for(i=0;i<n;i++){
@@ -387,16 +396,17 @@ bool CheckValiditateCarte(int carteaData,int jucator,int nrCarti,CARTE Atu,CARTE
     return 1;
   }
 
-  aux=date[jucator].carti[carteaData];
+  if(carteaData<0 || carteaData>nrCarti){
+    return 0;
+  }
 
   //assert(!(carteaData<0 || carteaData>nrCarti) && "Cartea Data Out Of Bounds");
 
   //assert(aux.used==0 && "Cartea Data A Fost Folosita Deja");
 
-  if(!(carteaData<0 || carteaData>nrCarti)){
-    return 0;
-  }
-  if(aux.used==0){
+  aux=date[jucator].carti[carteaData];
+
+  if(aux.used==1){
     return 0;
   }
 
@@ -405,12 +415,12 @@ bool CheckValiditateCarte(int carteaData,int jucator,int nrCarti,CARTE Atu,CARTE
   }
 
   i=0;
-  while(i<nrCarti && !(date[jucator].carti[i].culoare==PrimaPusa.culoare && date[jucator].carti[i].culoare==0)){
+  while(i<nrCarti && !(date[jucator].carti[i].culoare==PrimaPusa.culoare && date[jucator].carti[i].used==0)){
     i++;
   }
 
   //assert(i>=nrCarti && "Cartea Data Nu Respecta Culoarea");
-  if(i>=nrCarti){
+  if(i<nrCarti){
     return 0;
   }
 
@@ -419,12 +429,12 @@ bool CheckValiditateCarte(int carteaData,int jucator,int nrCarti,CARTE Atu,CARTE
   }
 
   i=0;
-  while(i<nrCarti && !(date[jucator].carti[i].culoare==Atu.culoare && date[jucator].carti[i].culoare==0)){
+  while(i<nrCarti && !(date[jucator].carti[i].culoare==Atu.culoare && date[jucator].carti[i].used==0)){
     i++;
   }
 
   //assert(i>=nrCarti && "Cartea Data Nu Este Atu");
-  if(i>=nrCarti){
+  if(i<nrCarti){
     return 0;
   }
 
