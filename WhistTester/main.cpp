@@ -9,7 +9,6 @@
 #include <chrono>
 #include <assert.h>
 #include <string>
-#include <conio.h>
 #include <string>
 #include <unistd.h>
 #define MAXN 7
@@ -230,7 +229,7 @@ string FormArgc(string strcommand,int player,int joc,CARTE cartiPers[MAXT],PUBLI
 }
 
 int PlayerGhicit(int player,int joc,CARTE cartiPers[MAXT],PUBLICPLAYER datePublice[MAXN],CARTE Atu,int isLast,int sumGhic){
-  int i,j,val,good;
+  int val,good;
   string strcommand;
 
   strcommand=FormArgc(date[player].SetGhicit,player,joc,cartiPers,datePublice,Atu);
@@ -259,7 +258,7 @@ int PlayerGhicit(int player,int joc,CARTE cartiPers[MAXT],PUBLICPLAYER datePubli
 }
 
 int PlayerCarte(int player,int joc,CARTE cartiPers[MAXT],PUBLICPLAYER datePublice[MAXN],CARTE Atu,CARTE PrimaCarte){
-  int i,val,aux,good;
+  int val,aux,good;
   CARTE rasp;
   string strcommand;
 
@@ -475,8 +474,8 @@ bool Maxim(CARTE a,CARTE b,CARTE Atu){
   return valA<valB;
 }
 
-int Joc(int nrCarti,int firstPlayer){
-  int i,j,c,s,poz,x,aux,z;
+void Joc(int nrCarti,int firstPlayer){
+  int i,j,c,s,x,aux,z;
   CARTE Atu,ma,carteJucator,primaCarte;
   PUBLICPLAYER datePublice[MAXN];
 
@@ -509,8 +508,6 @@ int Joc(int nrCarti,int firstPlayer){
   ///-----------------Final Zona Ghicit------------------------
 
   AfisJocStart(Atu,nrCarti);
-
-  poz=1;
 
   for(z=0;z<nrCarti;z++){
     i=firstPlayer;
