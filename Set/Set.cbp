@@ -11,7 +11,7 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Option parameters="  1  3  0 QC 0 0 -1  0 ++ 0 0 -1  0 ++ 0 0 -1  0 ++ JP" />
+				<Option parameters="  7  3  1  JT 9T KI JI KC TI 9C -9  -4  1  0 JP AT TC 9I AC ++ ++ 10  2  1  0 JT KI 9T JI ++ ++ ++ 4  2  1  0 AI 9P QI QC KT ++ ++ KP + KT" />
 				<Compiler>
 					<Add option="-g" />
 				</Compiler>

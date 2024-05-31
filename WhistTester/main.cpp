@@ -3,6 +3,7 @@
 #include <string.h>
 #include <iostream>
 #include <algorithm>
+#include <filesystem>
 #include <vector>
 #include <time.h>
 #include <random>
@@ -23,10 +24,10 @@
 
 using namespace std;
 
-///I-Inima rosie
-///C-Caro(Romb)
-///P-Pica(Inima Neagra)
-///T-Trefla
+///H-Hearts
+///D-Diamonds
+///S-Spades
+///C-Clubs
 
 ///Cartile sunt 2,3,4,5,6,7,8,9,T,J,Q,K,A (in aceasta ordine)
 
@@ -38,8 +39,8 @@ using namespace std;
     - Daca nu ai niciuna poti pune orice carte
 
   - Sistemul de puncte:
-    - Daca ai facut corect este 5+valGhicita
-    - Daca nu este -abs(valGhicita-nrCastiguri)
+    - Daca ai facut corect este 5+valLicitata
+    - Daca nu este -abs(valLicitata-nrCastiguri)
 
   - De mai implementat :
       - Sa inteleg cum functioneaza header-ul
@@ -62,7 +63,7 @@ struct PRIVATEPLAYER{
   char name[MAXNNAME];
   int puncte;
   int contorStreak;
-  int valGhicita;
+  int valLicitata;
   int nrCastiguri;
 };
 
@@ -70,14 +71,14 @@ struct PUBLICPLAYER{
   CARTE cartiFolosite[MAXT];
   int puncte;
   int contorStreak;
-  int valGhicita;
+  int valLicitata;
   int nrCastiguri;
 };
 
 FILE *fout;
 PRIVATEPLAYER date[MAXN];
 CARTE cartiOrd[PACHET];
-char culoriPosibile[MAXCULORI]={'I','C','P','T'}; ///Putem sa le schimbam
+char culoriPosibile[MAXCULORI]={'H','D','S','C'}; ///Putem sa le schimbam
 char tipuriCarti[MAXTIPURICARTI]={'2','3','4','5','6','7','8','9','T','J','Q','K','A'}; ///Putem sa le schimbam
 int nrCartiPachet;
 int nrMeci;
@@ -90,8 +91,8 @@ int TestSetGhicit(int joc,CARTE cartiPers[MAXT],PUBLICPLAYER datePublice[MAXN],C
 
   aux=0;
   for(i=0;i<n;i++){
-    if(datePublice[i].valGhicita!=-1){
-      aux+=datePublice[i].valGhicita;
+    if(datePublice[i].valLicitata!=-1){
+      aux+=datePublice[i].valLicitata;
     }
   }
 
@@ -186,61 +187,73 @@ string CharToString(char nr){
   return " "+nr;
 }
 
-string FormArgc(string strcommand,int player,int joc,CARTE cartiPers[MAXT],PUBLICPLAYER datePublice[MAXN],CARTE Atu){
+string FormArgc(string strcommand,int player,int joc,CARTE cartiPers[MAXT],PUBLICPLAYER datePublice[MAXN],CARTE Atu,FILE *input){
   int i,j;
 
-  strcommand=strcommand+NumberToString(joc);
-  strcommand=strcommand+NumberToString(n);
-  strcommand=strcommand+NumberToString(player);
+  fprintf(input,"nr_carti     : %2d\n",joc);
+  fprintf(input,"num_players  : %2d\n",n);
+  fprintf(input,"player_id    : %2d\n",player);
+  fprintf(input,"deal         : %2d\n",nrMeci);
+
+  fprintf(input,"scores : ");
+  for(i=0;i<n;i++){
+    fprintf(input,"%2d ",datePublice[i].puncte);
+  }
+  fprintf(input,"\n");
+
+  fprintf(input,"streaks : ");
+  for(i=0;i<n;i++){
+    fprintf(input,"%2d ",datePublice[i].contorStreak);
+  }
+  fprintf(input,"\n");
+
+  fprintf(input,"bids : ");
+  for(i=0;i<n;i++){
+    fprintf(input,"%2d ",datePublice[i].valLicitata);
+  }
+  fprintf(input,"\n");
+
+  fprintf(input,"atu : %c %c\n",Atu.val,Atu.culoare);
+
+  fprintf(input,"carti:\n");
 
   for(i=0;i<joc;i++){
-    strcommand=strcommand+" ";
-    strcommand=strcommand+cartiPers[i].val;
-    strcommand=strcommand+cartiPers[i].culoare;
-    //cout << strcommand;
+    fprintf(input,"%c %c\n",cartiPers[i].val,cartiPers[i].culoare);
   }
+  fprintf(input,"\n");
 
-  for(i=0;i<n;i++){
-    strcommand=strcommand+NumberToString(datePublice[i].puncte);
-    strcommand=strcommand+NumberToString(datePublice[i].contorStreak);
-    strcommand=strcommand+NumberToString(datePublice[i].valGhicita);
-    strcommand=strcommand+NumberToString(datePublice[i].nrCastiguri);
-
-    for(j=0;j<joc;j++){
-      strcommand=strcommand+" ";
-      if(datePublice[i].cartiFolosite[j].val!=-1){
-        strcommand=strcommand+datePublice[i].cartiFolosite[j].val;
-        strcommand=strcommand+datePublice[i].cartiFolosite[j].culoare;
-      }else{
-        strcommand=strcommand+"++";
-      }
+  fprintf(input,"mainiJucate:\n");
+  for(i=0;i<joc;i++){
+    fprintf(input,"| ");
+    for(j=0;j<n;j++){
+      fprintf(input,"%c %c | ",datePublice[j].cartiFolosite[i].val,datePublice[j].cartiFolosite[i].culoare);
     }
+    fprintf(input,"\n");
   }
-
-  strcommand=strcommand+" ";
-  if(Atu.val!=-1){
-    strcommand=strcommand+Atu.val;
-    strcommand=strcommand+Atu.culoare;
-  }else{
-    strcommand=strcommand+"++";
-  }
+  fprintf(input,"\n");
 
   return strcommand;
 }
 
-int PlayerGhicit(int player,int joc,CARTE cartiPers[MAXT],PUBLICPLAYER datePublice[MAXN],CARTE Atu,int isLast,int sumGhic){
+int PlayerLicitat(int player,int joc,CARTE cartiPers[MAXT],PUBLICPLAYER datePublice[MAXN],CARTE Atu,int isLast,int sumGhic){
   int val,good;
   string strcommand;
+  FILE *input;
+  input=fopen("input.in","w");
 
-  strcommand=FormArgc(date[player].SetGhicit,player,joc,cartiPers,datePublice,Atu);
+  strcommand=FormArgc(date[player].SetGhicit,player,joc,cartiPers,datePublice,Atu,input);
 
-  strcommand=strcommand+" -";
+  fprintf(input,"LICITEZI:\n");
+
+  fclose(input);
 
   val=system((strcommand).c_str());
 
+  remove("input.in");
+
   ///Check if is correct the card that was given
 
-  good=1;
+  good=0;
 
   if(isLast==1 && sumGhic==val){
     good=0;
@@ -261,25 +274,27 @@ int PlayerCarte(int player,int joc,CARTE cartiPers[MAXT],PUBLICPLAYER datePublic
   int val,aux,good;
   CARTE rasp;
   string strcommand;
+  FILE *input;
 
-  strcommand=FormArgc(date[player].SetGhicit,player,joc,cartiPers,datePublice,Atu);
+  input=fopen("input.in","w");
 
-  strcommand=strcommand+" +";
+  strcommand=FormArgc(date[player].SetGhicit,player,joc,cartiPers,datePublice,Atu,input);
 
-  strcommand=strcommand+" ";
-  strcommand=strcommand+PrimaCarte.val;
-  strcommand=strcommand+PrimaCarte.culoare;
+  fprintf(input,"CARTE:\n");
+  fprintf(input,"primaCarte : %c %c\n",PrimaCarte.val,PrimaCarte.culoare);
 
-  //cout << strcommand << '\n';
+  fclose(input);
 
   aux=system((strcommand).c_str());
+
+  remove("input.in");
 
   rasp.val=aux/ENCRYPT;
   rasp.culoare=aux%ENCRYPT;
 
   val=FindCarte(rasp,player);
 
-  good=1;
+  good=0;
 
   if(val==-1){
     good=0;
@@ -450,7 +465,7 @@ void AfisJocStart(CARTE Atu,int nrCarti){
   }
 
   for(i=0;i<n;i++){
-    fprintf(fout,"\n%s - Nr Alese - %2d\n",date[i].name,date[i].valGhicita);
+    fprintf(fout,"\n%s - Nr Alese - %2d\n",date[i].name,date[i].valLicitata);
     for(j=0;j<nrCarti;j++){
       fprintf(fout,"%c %c\n",date[i].carti[j].val,date[i].carti[j].culoare);
     }
@@ -486,9 +501,9 @@ void Joc(int nrCarti,int firstPlayer){
     datePublice[i].contorStreak=date[i].contorStreak;
     datePublice[i].nrCastiguri=0;
     datePublice[i].puncte=date[i].puncte;
-    datePublice[i].valGhicita=-1;
+    datePublice[i].valLicitata=-1;
     for(j=0;j<MAXT;j++){
-      datePublice[i].cartiFolosite[j]={-1,-1,-1};
+      datePublice[i].cartiFolosite[j]={'$','$',1};
     }
   }
 
@@ -497,13 +512,13 @@ void Joc(int nrCarti,int firstPlayer){
   s=0;
   i=firstPlayer;
   for(c=1;c<n;c++){
-    date[i].valGhicita=PlayerGhicit(i,nrCarti,date[i].carti,datePublice,Atu,0,0);
-    datePublice[i].valGhicita=date[i].valGhicita;
-    s+=date[i].valGhicita;
+    date[i].valLicitata=PlayerLicitat(i,nrCarti,date[i].carti,datePublice,Atu,0,0);
+    datePublice[i].valLicitata=date[i].valLicitata;
+    s+=date[i].valLicitata;
     i=(i+1)%n;
   }
-  date[i].valGhicita=PlayerGhicit(i,nrCarti,date[i].carti,datePublice,Atu,1,nrCarti-s);
-  datePublice[i].valGhicita=date[i].valGhicita;
+  date[i].valLicitata=PlayerLicitat(i,nrCarti,date[i].carti,datePublice,Atu,1,nrCarti-s);
+  datePublice[i].valLicitata=date[i].valLicitata;
 
   ///-----------------Final Zona Ghicit------------------------
 
@@ -513,7 +528,7 @@ void Joc(int nrCarti,int firstPlayer){
     i=firstPlayer;
     x=firstPlayer;
 
-    aux=PlayerCarte(x,nrCarti,date[i].carti,datePublice,Atu,{-1,-1,-1});
+    aux=PlayerCarte(x,nrCarti,date[i].carti,datePublice,Atu,{'$','$',1});
 
     date[i].carti[aux].used=1;
     carteJucator=date[i].carti[aux];
@@ -548,7 +563,7 @@ void Joc(int nrCarti,int firstPlayer){
 
   fprintf(fout,"\n");
   for(i=0;i<n;i++){
-    if(date[i].nrCastiguri==date[i].valGhicita){
+    if(date[i].nrCastiguri==date[i].valLicitata){
       date[i].puncte+=5+date[i].nrCastiguri;
       if(date[i].contorStreak>=0){
         date[i].contorStreak++;
@@ -556,7 +571,7 @@ void Joc(int nrCarti,int firstPlayer){
         date[i].contorStreak=-1;
       }
     }else{
-      date[i].puncte-=abs(date[i].nrCastiguri-date[i].valGhicita);
+      date[i].puncte-=abs(date[i].nrCastiguri-date[i].valLicitata);
       if(date[i].contorStreak<=0){
         date[i].contorStreak--;
       }else{
@@ -593,9 +608,9 @@ void Init(){
   date[1].GiveCarte=TestGiveCarte;
   date[2].GiveCarte=TestGiveCarte;*/
 
-  date[0].SetGhicit="bin\\Debug\\Set.exe ";
-  date[1].SetGhicit="bin\\Debug\\Set.exe ";
-  date[2].SetGhicit="bin\\Debug\\Set.exe ";
+  date[0].SetGhicit="Set.exe ";
+  date[1].SetGhicit="Set.exe ";
+  date[2].SetGhicit="Set.exe ";
 
   strcpy(date[0].name,  "TTCO ");
   strcpy(date[1].name,  "Test1");
@@ -623,22 +638,27 @@ int main() {
 
     firstPlayer=0; ///Jocurile sunt de n ori 1
     for(i=1;i<=n;i++){
+      printf("1\n");
       Joc(1,firstPlayer);
       firstPlayer=(firstPlayer+1)%n;
     }
     for(i=2;i<=7;i++){///si dupa 2 3 ... 7
+      printf("%d\n",i);
       Joc(i,firstPlayer);
       firstPlayer=(firstPlayer+1)%n;
     }
     for(i=1;i<=n;i++){///de n ori 8
+      printf("8\n");
       Joc(8,firstPlayer);
       firstPlayer=(firstPlayer+1)%n;
     }
     for(i=7;i>=2;i--){///si dupa 7 6 ... 2
+      printf("%d\n",i);
       Joc(i,firstPlayer);
       firstPlayer=(firstPlayer+1)%n;
     }
     for(i=1;i<=n;i++){///de n ori 1 (nu stiu inca daca jucam cu cartile pe fata)
+      printf("1\n");
       Joc(1,firstPlayer);
       firstPlayer=(firstPlayer+1)%n;
     }
@@ -662,7 +682,6 @@ int main() {
 
       fprintf(fout,"\n");
     }
-
     fclose(fout);
     return 0;
 }

@@ -1,0 +1,16 @@
+nr_carti     :  1
+num_players  :  3
+player_id    :  0
+deal         :  0
+scores :  0  0  0 
+streaks :  0  0  0 
+bids :  0  0  0 
+atu : T H
+carti:
+A D
+
+mainiJucate:
+| $ $ | $ $ | $ $ | 
+
+CARTE:
+primaCarte : $ $
